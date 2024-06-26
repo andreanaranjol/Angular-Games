@@ -8,11 +8,11 @@
         <input id="name" type="text" #gameName />
       </div>
       <div class="field">
-        <label for="name">Descripción</label>
-        <textarea id="name" type="text" #gameDescription ></textarea>
+        <label for="description">Descripción</label>
+        <textarea id="description" type="text" #gameDescription ></textarea>
       </div>
       <div class="actions">
-        <button type="submit" [disabled]="gameDescription.value != '' && gameName.value != ''" (click)="crearJuego(gameName.value, gameDescription.value)" class="btn-primary">Crear</button>
+        <button (click)="crearJuego(gameName.value, gameDescription.value)" class="btn-primary">Crear</button>
         <a href="/angular/senior/games" class="btn-secondary">Cancelar</a>
       </div>
     </form>

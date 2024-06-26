@@ -3,8 +3,8 @@
     <h2 class="title">Juegos</h2>
     <!--BEGIN: TUS CAMBIOS AQUI-->
     <div class="find-container">
-      <input type="text" class="form-control" placeholder="Busca juegos por ID" #filter (keyup)="update(filter.value)">
-      <button class="btn-new" type="button" (click)="update(''); filter.value = ''">Limpiar</button>
+      <input type="text" class="form-control" placeholder="Busca juegos por ID" #filter (keyup)="updateGames(filter.value)">
+      <button class="btn-new" type="button" (click)="updateGames(''); filter.value = ''">Limpiar</button>
     </div>
     <div class="actions">
       <a href="/angular/senior/games/new" class="btn-new">Nuevo</a>
@@ -17,7 +17,7 @@
               <p class="row-content">{{game.name}}</p>
             </div>
             <div class="row-action">
-              <button class="btn-delete">Eliminar</button>
+              <button (click)="deleteGame(game.id)" class="btn-delete">Eliminar</button>
             </div>
             <div class="row-action">
               <a href="/angular/senior/games/{{game.id}}" class="btn-edit">Editar</a>

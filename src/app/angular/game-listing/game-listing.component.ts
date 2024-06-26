@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Game } from '../types';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-listing',
@@ -10,16 +11,24 @@ import { Observable, of } from 'rxjs';
 })
 export class GameListingComponent implements OnInit {
   games: Observable<Game[] | undefined> = of(undefined);
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService
+  ) {}
 
   ngOnInit(): void {
     this.games = this.gameService.getGames();
   }
 
-  update(gameId: string) {
+  updateGames(gameId: string) {
     if (gameId == "")
       this.games = this.gameService.getGames();
     else
-      this.games = this.gameService.getGameById(gameId);
+      this.games = this.gameService.getGames().pipe(
+        map(games => games.filter(game => String(game.id) === gameId))
+      );
+  }
+
+  deleteGame(gameId: number) {
+    this.gameService.deleteGame(String(gameId));
   }
 }

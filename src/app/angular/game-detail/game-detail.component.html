@@ -5,18 +5,18 @@
     <form>
       <div class="field">
         <label for="id">Id</label>
-        <input id="id" type="text" disabled />
+        <input id="id" type="text" disabled value="{{gameId}}"/>
       </div>
       <div class="field">
         <label for="name">Nombre</label>
-        <input id="name" type="text" />
+        <input id="name" type="text" value="{{gameName}}"/>
       </div>
       <div class="field">
-        <label for="name">Descripción</label>
-        <textarea id="name" type="text"></textarea>
+        <label for="description">Descripción</label>
+        <textarea id="description" type="text" value="{{gameDescription}}"></textarea>
       </div>
       <div class="actions">
-        <button type="submit" class="btn-primary">Actualizar</button>
+        <button type="submit" class="btn-primary" (click)="updateGame(gameId, gameName, gameDescription)">Actualizar</button>
         <a href="/angular/senior/games" class="btn-secondary">Cancelar</a>
       </div>
     </form>
