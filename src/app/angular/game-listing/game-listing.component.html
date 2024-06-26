@@ -1,0 +1,27 @@
+<div class="bg">
+  <div class="card">
+    <h2 class="title">Juegos</h2>
+    <!--BEGIN: TUS CAMBIOS AQUI-->
+    <div class="actions">
+      <a href="/angular/senior/games/new" class="btn-new">Nuevo</a>
+    </div>
+    <div *ngIf="games">
+      <ul role="list" class="list">
+        <li *ngFor="let game of games" class="item">
+          <div class="row">
+            <div class="row-group">
+              <p class="row-content">{{game.name}}</p>
+            </div>
+            <div class="row-action">
+              <button class="btn-delete">Eliminar</button>
+            </div>
+            <div class="row-action">
+              <a href="/angular/senior/games/{{game.id}}" class="btn-edit">Editar</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!--END: TUS CAMBIOS AQUI-->
+  </div>
+</div>

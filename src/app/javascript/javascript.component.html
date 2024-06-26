@@ -1,0 +1,15 @@
+<div *ngIf="exams" class="relative bg-gray-50 pt-8 pb-20 px-4 sm:px-6 lg:pt-12 lg:pb-28 lg:px-8 min-h-screen">
+  <div class="relative max-w-5xl mx-auto">
+    <h2 class="mb-6 text-center text-3xl font-extrabold text-gray-900">Ejercicios JavaScript</h2>
+    <div *ngFor="let exam of exams" class="my-4">
+      <p class="text-lg leading-6 font-medium text-gray-900">{{exam.name}}</p>
+      <ol class="list-decimal list-inside">
+        <li *ngFor="let exercise of exam.exercises">
+          <a href="/javascript/{{exam.id}}/{{exercise.id}}" class="font-medium text-indigo-600 hover:text-indigo-500">
+            {{exercise.name}}
+          </a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

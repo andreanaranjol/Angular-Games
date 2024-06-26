@@ -1,0 +1,12 @@
+<div *ngIf="exercise && exerciseNumber && packageId" class="mb-8">
+  <label class="text-base font-medium text-gray-900">{{exerciseNumber}}. {{exercise.name}}</label>
+  <p class="my-4">{{exercise.description}}</p>
+  <p class="my-4">
+    Resuelve el ejercicio en el archivo/carpeta: <em class="bg-gray-50 p-1 border-2">{{exercise.code}}</em>
+  </p>
+  <p class="my-4">
+    El ejercicio se ejecuta automáticamente <a class="font-medium text-indigo-600 hover:text-indigo-500"
+      href="/{{packageId}}/{{examId}}/{{exercise.id}}" target="_blank">aqui</a>
+  </p>
+  <markdown *ngIf="exercise.snippet" lineNumbers src="/markdown/{{packageId}}/exercise/{{exercise.id}}.md"></markdown>
+</div>

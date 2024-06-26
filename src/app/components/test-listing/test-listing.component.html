@@ -1,0 +1,7 @@
+<div *ngIf="data" class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul role="list" class="divide-y divide-gray-200">
+    <li *ngFor="let test of data">
+      <app-test [test]="test" [type]="type"></app-test>
+    </li>
+  </ul>
+</div>

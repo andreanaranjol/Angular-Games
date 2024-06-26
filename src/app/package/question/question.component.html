@@ -1,0 +1,15 @@
+<div *ngIf="question && questionNumber && packageId" class="mb-8">
+  <label class="text-base font-medium text-gray-900">{{questionNumber}}. {{question.question}}</label>
+  <markdown *ngIf="question.snippet" lineNumbers src="/markdown/{{packageId}}/question/{{question.id}}.md"></markdown>
+  <fieldset class="mt-4">
+    <div class="space-y-4">
+      <div class="flex items-center" *ngFor="let option of question.options; let optionIndex=index;">
+        <input id="{{question.id}}_option{{optionIndex}}" [name]="question.id" type="radio"
+          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300" [value]="alphabet[optionIndex]">
+        <label for="{{question.id}}_option{{optionIndex}}"
+          class="ml-3 block text-sm font-normal text-gray-700"><strong>{{alphabet[optionIndex] | uppercase}}.</strong>
+          {{option}}</label>
+      </div>
+    </div>
+  </fieldset>
+</div>
