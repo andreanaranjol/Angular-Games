@@ -10,25 +10,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./game-listing.component.css'],
 })
 export class GameListingComponent implements OnInit {
-  games: Observable<Game[] | undefined> = of(undefined);
+  public games?: Game[] = [];
   constructor(
     private gameService: GameService
   ) {}
 
   ngOnInit(): void {
-    this.games = this.gameService.getGames();
+    this.getGames();
+  }
+
+  getGames() {
+    this.games = JSON.parse(localStorage.getItem("games") || "[]");
+    if (this.games?.length == 0)
+      this.gameService.getGames().subscribe(games => {
+        this.games = games;
+      });
   }
 
   updateGames(gameId: string) {
     if (gameId == "")
-      this.games = this.gameService.getGames();
+      this.gameService.getGames().subscribe(games => {
+        this.games = games;
+      });
     else
-      this.games = this.gameService.getGames().pipe(
-        map(games => games.filter(game => String(game.id) === gameId))
-      );
+      this.gameService.getGames().subscribe(games => {
+        this.games = games.filter(game => String(game.id) === gameId);
+      });
   }
 
   deleteGame(gameId: number) {
-    this.gameService.deleteGame(String(gameId));
+    this.gameService.deleteGame(String(gameId)).subscribe(response => {
+      this.gameService.getGames().subscribe((games => {
+        localStorage.setItem("games", JSON.stringify(games as Game[]))
+        this.getGames();
+      })) 
+    });
   }
+  
 }

@@ -9,7 +9,7 @@
     <div class="actions">
       <a href="/angular/senior/games/new" class="btn-new">Nuevo</a>
     </div>
-    <div *ngIf="games | async as games">
+    <div *ngIf="games">
       <ul role="list" class="list">
         <li *ngFor="let game of games" class="item">
           <div class="row">

@@ -15,27 +15,19 @@ export class GameService {
     return this.http.get<Game[]>(this.gamesUrl);
   }
 
-  getGameById(gameId: string) {
+  getGameById(gameId: string): Observable<Game> {
     return this.http.get<Game>(this.gamesUrl + `/${gameId}`)
   }
 
-  createGame(gameName: string, gameDescription: string) {
-    // API usage is not clear in documentation
-    return this.http.post<Game>(this.gamesUrl, {game: ""}, {})
+  createGame(game: Game): Observable<Game> {
+    return this.http.post<Game>(this.gamesUrl, game)
   }
 
-  updateGame(game: Game) {
-    const params = new HttpParams()
-      .append("id", game.id)
-    return this.http.put(this.gamesUrl + `/${game.id}`, {
-      id: game.id,
-      name: game.name,
-      description: game.description
-    }, {params: params});
+  updateGame(game: Game):Observable<any> {
+    return this.http.put<Game>(this.gamesUrl + `/${game.id}`, game);
   }
 
-  deleteGame(gameId: string) {
-    //throw new Error('Not implemented yet');
+  deleteGame(gameId: string): Observable<any> {
     return this.http.delete(this.gamesUrl + `/${gameId}`)
   }
 }

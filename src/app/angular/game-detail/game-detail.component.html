@@ -5,18 +5,18 @@
     <form>
       <div class="field">
         <label for="id">Id</label>
-        <input id="id" type="text" disabled value="{{gameId}}"/>
+        <input id="id" type="text" disabled [(ngModel)]="gameId" [ngModelOptions]="{standalone: true}" />
       </div>
       <div class="field">
         <label for="name">Nombre</label>
-        <input id="name" type="text" value="{{gameName}}"/>
+        <input id="name" type="text" [(ngModel)]="gameName" [ngModelOptions]="{standalone: true}"/>
       </div>
       <div class="field">
         <label for="description">Descripción</label>
-        <textarea id="description" type="text" value="{{gameDescription}}"></textarea>
+        <textarea id="description" type="text" [(ngModel)]="gameDescription" [ngModelOptions]="{standalone: true}" ></textarea>
       </div>
       <div class="actions">
-        <button type="submit" class="btn-primary" (click)="updateGame(gameId, gameName, gameDescription)">Actualizar</button>
+        <button type="submit" class="btn-primary" (click)="updateGame()">Actualizar</button>
         <a href="/angular/senior/games" class="btn-secondary">Cancelar</a>
       </div>
     </form>

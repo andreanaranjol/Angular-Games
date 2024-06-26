@@ -2,44 +2,51 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from '../types';
 import { GameService } from '../game.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
   styleUrls: ['./game-detail.component.css']
 })
+
 export class GameDetailComponent implements OnInit {
 
   public gameId: string = "";
   public gameName : string = "";
   public gameDescription: string = "";
+  public games?: Game[] = [];
 
   constructor(
     private gameService: GameService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.gameId = params["gameId"];
-      this.gameService.getGameById(this.gameId).subscribe(game => {
-        this.gameName = game.name;
-        this.gameDescription = game.description;
-      })
+      this.games = JSON.parse(localStorage.getItem("games") || "[]");
+      if (this.games?.length == 0)
+        this.gameService.getGames().subscribe(games => {
+          this.games = games;
+        });
+      this.gameName = this.games?.find(game => game.id == parseInt(this.gameId))?.name || "";
+      this.gameDescription = this.games?.find(game => game.id == parseInt(this.gameId))?.description || "";
     })
   }
 
-  updateGame(id: string, name: string, description: string) {
-    let updatedGame: Game = {
-      id: parseInt(id),
-      name: name,
-      description: description
-    }
-    this.gameService.updateGame(updatedGame).subscribe((response) => {
-      console.log(response);
-      this.router.navigateByUrl("angular/senior/games");
+  updateGame() {
+    const updatedGame: Game = {
+      id: parseInt(this.gameId),
+      name: this.gameName,
+      description: this.gameDescription
+    };
+    this.gameService.updateGame(updatedGame).subscribe(() => {
+      this.gameService.getGames().subscribe(games => {
+        localStorage.setItem("games", JSON.stringify(games as Game[]));
+        this.router.navigateByUrl("angular/senior/games");
+      })
     });
   }
 
