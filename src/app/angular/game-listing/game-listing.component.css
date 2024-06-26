@@ -45,3 +45,8 @@
 .btn-delete {
   @apply inline-flex items-center shadow-sm px-2.5 py-0.5 border border-transparent text-sm leading-5 font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500;
 }
+
+.find-container {
+  display: flex;
+  gap: 10px;
+}

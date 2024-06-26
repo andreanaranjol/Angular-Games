@@ -12,4 +12,8 @@ export class GameNewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  crearJuego(gameName: string, gameDescription: string) {
+    
+  }
+
 }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Game } from './types';
+import { map } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,19 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
-  getGames(): Observable<Game[]> {
+  getGames() {
     return this.http.get<Game[]>(this.gamesUrl);
   }
 
   getGameById(gameId: string) {
-    throw new Error('Not implemented yet');
+    //return this.http.get<Game>(this.gamesUrl + `/${gameId}`)
+    return this.getGames().pipe(
+      map(games => games.filter(game => String(game.id) === gameId))
+    );
   }
 
-  createGame(game: Game) {
-    throw new Error('Not implemented yet');
+  createGame(gameName: string, gameDescription: string) {
+    return this.http.post(this.gamesUrl, {name: gameName, description: gameDescription})
   }
 
   updateGame(game: Game) {

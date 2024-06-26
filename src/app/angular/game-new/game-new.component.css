@@ -34,3 +34,11 @@ textarea {
 .actions {
   @apply flex space-x-4;
 }
+
+button {
+  &[disabled] {
+    background-color: #ccc;
+    color: #333;
+    cursor: not-allowed;
+  }
+}

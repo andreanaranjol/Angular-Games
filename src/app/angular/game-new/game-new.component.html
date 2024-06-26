@@ -5,14 +5,14 @@
     <form>
       <div class="field">
         <label for="name">Nombre</label>
-        <input id="name" type="text" />
+        <input id="name" type="text" #gameName />
       </div>
       <div class="field">
         <label for="name">Descripción</label>
-        <textarea id="name" type="text"></textarea>
+        <textarea id="name" type="text" #gameDescription ></textarea>
       </div>
       <div class="actions">
-        <button type="submit" class="btn-primary">Crear</button>
+        <button type="submit" [disabled]="gameDescription.value != '' && gameName.value != ''" (click)="crearJuego(gameName.value, gameDescription.value)" class="btn-primary">Crear</button>
         <a href="/angular/senior/games" class="btn-secondary">Cancelar</a>
       </div>
     </form>

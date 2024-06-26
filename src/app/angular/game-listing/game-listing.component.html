@@ -2,10 +2,14 @@
   <div class="card">
     <h2 class="title">Juegos</h2>
     <!--BEGIN: TUS CAMBIOS AQUI-->
+    <div class="find-container">
+      <input type="text" class="form-control" placeholder="Busca juegos por ID" #filter (keyup)="update(filter.value)">
+      <button class="btn-new" type="button" (click)="update(''); filter.value = ''">Limpiar</button>
+    </div>
     <div class="actions">
       <a href="/angular/senior/games/new" class="btn-new">Nuevo</a>
     </div>
-    <div *ngIf="games">
+    <div *ngIf="games | async as games">
       <ul role="list" class="list">
         <li *ngFor="let game of games" class="item">
           <div class="row">
